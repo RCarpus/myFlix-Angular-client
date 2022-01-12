@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
+## Installing Angular
+If Angular is not already installed, run `npm install -g @angular/cli`
+
+## Creating a new project
+Navigate to the target folder for the new project and run `ng new project_name`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
