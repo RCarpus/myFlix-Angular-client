@@ -33,7 +33,7 @@ export class FetchApiDataService {
   }
 
   public userLogin(loginCredentials: any): Observable<any> {
-    return this.http.post(apiUrl + 'login', { loginCredentials }).pipe(
+    return this.http.post(apiUrl + 'login', loginCredentials).pipe(
       catchError(this.handleError)
     );
   }
@@ -60,20 +60,20 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
 
-  public getOneMovie(movieID: string): Observable<any> {
+  public getOneMovie(movieTitle: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies/' + movieID, {
+    return this.http.get(apiUrl + 'movies/' + movieTitle, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
@@ -86,7 +86,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
@@ -99,7 +99,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
@@ -113,7 +113,21 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
+      catchError(this.handleError)
+    );
+  }
+
+  public getFavoriteMovies(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    return this.http.get(apiUrl + 'users/' + user + '/favorites' , {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
@@ -127,20 +141,21 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
 
-  public deleteUser(user: string): Observable<any> {
+  public deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/deregister' + user {
+    const user = localStorage.getItem('user');
+    return this.http.delete(apiUrl + 'users/deregister' + user, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
@@ -153,7 +168,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
@@ -166,13 +181,13 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData), // What is going on here?
+      map(this.extractResponseData), 
       catchError(this.handleError)
     );
   }
 
   // Non-typed response extraction
-  private extractResponseData(res: Response): any {
+  private extractResponseData(res: any): any {
     const body = res;
     return body || {};
   }
