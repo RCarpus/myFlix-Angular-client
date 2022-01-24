@@ -45,3 +45,8 @@ The components used in this project are:
 - FormsModule
 
 The components are imported into `app.module.ts` and added to the imports list under @NgModule.
+
+
+
+## Issues
+- The Angular app has an endpoint to get the user's favorite movies. The API doesn't yet have an endpoint dedicated to that task.
