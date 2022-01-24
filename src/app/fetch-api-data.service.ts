@@ -27,7 +27,11 @@ export class FetchApiDataService {
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+    // I want to prevent the API from receiving an empty string for the Birthday.
+    // This would make the registration fail.
+    let userDetailsToSend = { ...userDetails };
+    if (userDetails.Birthday === '' ) delete userDetailsToSend.Birthday;
+    return this.http.post(apiUrl + 'users/register', userDetailsToSend).pipe(
       catchError(this.handleError)
     );
   }
