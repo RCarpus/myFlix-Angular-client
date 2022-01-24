@@ -31,3 +31,17 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Using Material Design
+To Add Material Deisgn to the project, runt `ng add @angular/material`  
+When prompted to setup Material Design, for this project, we are using Custom theme, global Angular Material typography styles, and browser animations.  
+The components used in this project are:
+- MatInputModule
+- MatButtonModule
+- MatCardModule
+- MatFormFieldModule
+- MatDialogModule
+- MatSnackBarModule
+- FormsModule
+
+The components are imported into `app.module.ts` and added to the imports list under @NgModule.
