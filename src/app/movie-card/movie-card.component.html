@@ -8,7 +8,10 @@
     <mat-card-actions>
       <button (click)="openGenreDialog(movie.Genre)" mat-button color="primary">Genre</button>
       <button (click)="openDirectorDialog(movie.Director)" mat-button color="primary">Director</button>
-      <mat-icon>favorite_border</mat-icon>
+      <mat-icon *ngIf="!movie.isFavorite" (click)="addFavorite(movie._id)">favorite_border</mat-icon>
+      <mat-icon *ngIf="movie.isFavorite" (click)="removeFavorite(movie._id)">favorite_filled</mat-icon>
+
+
     </mat-card-actions>
   </mat-card>
 </div>
