@@ -21,6 +21,9 @@ import { UserRegistrationFormComponent } from './user-registration-form/user-reg
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { MatIconModule } from '@angular/material/icon';
+import { DirectorComponent } from './director/director.component';
+import { GenreComponent } from './genre/genre.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -34,7 +37,9 @@ const appRoutes: Routes = [
     UserRegistrationFormComponent,
     UserLoginFormComponent,
     MovieCardComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    DirectorComponent,
+    GenreComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
