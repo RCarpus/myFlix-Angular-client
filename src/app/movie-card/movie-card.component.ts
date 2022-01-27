@@ -95,5 +95,8 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  toProfile(): void {
+    location.href='/profile';
+  }
 
 }
