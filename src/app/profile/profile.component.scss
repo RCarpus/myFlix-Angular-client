@@ -1,0 +1,48 @@
+.mat-snack-bar-container {
+  width: 1000px !important;
+}
+
+span.mat-button-wrapper {
+  overflow-wrap: break-word;
+}
+
+.profile-field {
+  width: 300px;
+  display: block;
+}
+
+form {
+  width: 300px;
+}
+
+.sucessful-snack {
+  color: rgb(0, 255, 0);
+}
+
+.failed-snack {
+  width: 1000px;
+}
+
+#favorite-movie-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  // flex-direction: column;
+}
+
+.movie-card {
+  width: 320px;
+}
+
+img {
+  width: 300px;
+  height: auto;
+}
+
+#favorites-title {
+  width: 99%;
+  text-align: center;
+  font-size: 3em;
+  margin: 1em;
+
+}

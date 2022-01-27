@@ -6,16 +6,18 @@
   <p>Birthday: {{userData.Birthday | date:'longDate' || 'not set'}}</p>
   <mat-card-content>
     <form>
-      <mat-form-field>
+      <mat-form-field class='profile-field'>
         <input matInput [(ngModel)]="updatedUserData.Username" placeholder="Username" type="text" name="Username" >
+        <mat-hint align='end'>min 5 characters, no spaces or special characters</mat-hint>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class='profile-field'>
         <input matInput [(ngModel)]="updatedUserData.Password" placeholder="Password" type="password" name="Password" >
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class='profile-field'>
         <input matInput [(ngModel)]="updatedUserData.Email" placeholder="email" type="email" name="Email">
+        <mat-hint align='end'>must be a valid email format</mat-hint>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class='profile-field'>
         <input matInput [(ngModel)]="updatedUserData.Birthday" placeholder="Birthday" type="date" name="Birthday">
       </mat-form-field>
     </form>
@@ -24,3 +26,19 @@
     <button mat-raised-button (click)="updateUser()" color="primary">Update</button>
   </mat-card-actions>
 </mat-card>
+
+<div id="favorite-movie-card-container">
+  <h1 id="favorites-title">Your favorites</h1>
+  <mat-card *ngFor="let movie of favoriteMovies; let i=index;" class="movie-card">
+    <mat-card-header>
+      <mat-card-title>{{movie.Title}}</mat-card-title>
+      <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img src={{movie.ImagePath}} />
+    <mat-card-actions>
+      <button (click)="openGenreDialog(movie.Genre)" mat-button color="primary">Genre</button>
+      <button (click)="openDirectorDialog(movie.Director)" mat-button color="primary">Director</button>
+      <mat-icon (click)="removeFavorite(movie._id)">favorite_filled</mat-icon>
+    </mat-card-actions>
+  </mat-card>
+</div>
