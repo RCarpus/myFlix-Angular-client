@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
+import { DescriptionComponent } from '../description/description.component';
 
 @Component({
   selector: 'app-profile',
@@ -117,6 +118,13 @@ export class ProfileComponent implements OnInit {
     this.dialog.open(GenreComponent, {
       width: '280px',
       data: { genre }
+    });
+  }
+
+  openDescriptionDialog(movie: any): void {
+    this.dialog.open(DescriptionComponent, {
+      width: '280px',
+      data: { movie }
     });
   }
 

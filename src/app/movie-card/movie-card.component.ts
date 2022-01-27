@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
+import { DescriptionComponent } from '../description/description.component';
 import { NgIf } from '@angular/common';
 
 
@@ -106,6 +107,13 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(GenreComponent, {
       width: '280px',
       data: { genre }
+    });
+  }
+
+  openDescriptionDialog(movie: any): void {
+    this.dialog.open(DescriptionComponent, {
+      width: '280px',
+      data: { movie }
     });
   }
 
