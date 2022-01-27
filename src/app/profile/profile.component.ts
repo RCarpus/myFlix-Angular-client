@@ -34,22 +34,30 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    /**
+     * Loads in the user data and 
+     * THEN fetches movies
+     */
     let user: string = localStorage.getItem('user') || '';
     console.log(`loading data for: ${user}`);
     this.fetchApiData.getOneUser(user).subscribe((resp: any) => {
       this.userData = resp;
       console.log(resp);
+      this.getMovies();
       return resp;
     }, (error: any) => {
       console.error(error);
       localStorage.clear();
       location.href = '.';
     });
-
-    this.getMovies();
   }
 
   updateUser(): void {
+    /**
+     * Updates the user's data. Only send data to server for fields that have been filled in.
+     * If the data is formatted poorly, the error from the server should trigger
+     * a warning message to the user to check their data format.
+     */
     let user: string = localStorage.getItem('user') || '';
     console.log(`updated data for ${user}`);
     console.log(this.updatedUserData);
@@ -79,19 +87,16 @@ export class ProfileComponent implements OnInit {
 
   getMovies(): void {
     /**
-     * Download all the movie data and then filter out the favorites
+     * Download all the movie data and THEN filter out the favorites
      */
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       this.movies.forEach(movie => {
         movie.ImagePath = `../assets/img/${movie.ImagePath}`;
       });
-      // console.log(this.movies);
-      if (this.userData.FavoriteMovies.length > 0) {
+      if (this.userData.FavoriteMovies) {
         this.favoriteMovies = this.userData.FavoriteMovies.map((_id: string) => {
-          // console.log(`checking ${_id}`);
           return this.movies.find((movie: any) => {
-            // console.log(movie._id, _id);
             return movie._id === _id;
           });
         });
@@ -119,6 +124,28 @@ export class ProfileComponent implements OnInit {
     this.fetchApiData.removeFavoriteMovie(id).subscribe((resp:any) => {
       location.reload();
     })
+  }
+
+  toMovies(): void {
+    location.href='/movies';
+  }
+
+  deleteUserAccount(): void {
+    let confirmed:boolean = window.confirm('WARNING: This can not be undone. Are you sure you want to delete your profile?');
+    console.log(confirmed);
+    if (confirmed) {
+      this.fetchApiData.deleteUser().subscribe((resp:any) => {
+        console.log(resp);
+        localStorage.clear();
+        location.href = '/';
+      }, (error:any) => {
+        console.error(error);
+        console.log('This is not really an error');
+        this.snackBar.open('bye', 'don\'t let the door hit you on the way out');
+        localStorage.clear();
+        location.href = '/';
+      });
+    }
   }
 
 }
