@@ -1,6 +1,12 @@
 #movie-card-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  // flex-direction: column;
+}
+
+.movie-card {
+  width: 320px;
 }
 
 img {
