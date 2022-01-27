@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
@@ -10,13 +12,17 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss']
+  styleUrls: ['./movie-card.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   favoriteMovieIDs: any[] = [];
 
-  constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog) { }
+  constructor(
+    public fetchApiData: FetchApiDataService, 
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getMovies();
@@ -70,6 +76,11 @@ export class MovieCardComponent implements OnInit {
       this.favoriteMovieIDs = resp.FavoriteMovies;
       console.log(this.favoriteMovieIDs);
       this.mapFavorites();
+      this.snackBar.open('Good choice!', 'Added to Favorites', {
+        duration: 2000,
+        panelClass: ['added-to-favorites'],
+        
+      })
     })
   }
 
@@ -78,6 +89,9 @@ export class MovieCardComponent implements OnInit {
       this.favoriteMovieIDs = resp.FavoriteMovies;
       console.log(this.favoriteMovieIDs);
       this.mapFavorites();
+      this.snackBar.open('I don\'t like that one either!', 'Removed from Favorites', {
+        duration: 2000
+      });
     })
   }
 
