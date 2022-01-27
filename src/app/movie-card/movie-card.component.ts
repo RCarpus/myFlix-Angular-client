@@ -38,6 +38,11 @@ export class MovieCardComponent implements OnInit {
       });
 
       return this.movies;
+    }, (error: any) => {
+      console.log('hey idiot. You are not logged in. (Or the server is broke. Sorry)');
+      console.error(error);
+      localStorage.clear();
+      location.href='.';
     });
     console.log('not waiting');
   }
