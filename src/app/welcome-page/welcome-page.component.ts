@@ -23,12 +23,21 @@ export class WelcomePageComponent implements OnInit {
     });
   }
 
-  // This is the function that will open the dialog whenthe signup button is clicked
   openUserLoginDialog(): void {
-    this.dialog.open(UserLoginFormComponent, {
-      // Assigning the dialog a width
-      width: '280px'
-    });
+    /**
+     * If the user is already logged in, they should have a valid JWT
+     * saved in localStorage already. This function checks for a JWT first.
+     * If it's found, the user is redirected to the movie card page.
+     * Otherwise, the login dialog should open.
+     */
+    if (localStorage.getItem('token')) location.href = '/movies';
+    else {
+      this.dialog.open(UserLoginFormComponent, {
+        // Assigning the dialog a width
+        width: '280px'
+      });
+    }
+
   }
 
 }
