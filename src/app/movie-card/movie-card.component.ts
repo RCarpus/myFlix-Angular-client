@@ -24,19 +24,22 @@ export class MovieCardComponent implements OnInit {
 
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      /**
+       * When the user loads the /movies page, loads in the movies and 
+       * renders movie card elements. If this fails for any reason
+       * (likely because the user is not logged in, or the token expired)
+       * the localStorage gets cleared and the user is redirected to the home page.
+       */
       this.movies = resp;
       // ImagePath is saved to server as <MovieTitle>.jpg
       // I need to modify the returned data to find the actual image path in this app.
       this.movies.forEach(movie => {
         movie.ImagePath = `../assets/img/${movie.ImagePath}`;
       });
-      console.log(this.movies);
       this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
         this.favoriteMovieIDs = resp;
-        console.log(this.favoriteMovieIDs);
         this.mapFavorites();
       });
-
       return this.movies;
     }, (error: any) => {
       console.log('hey idiot. You are not logged in. (Or the server is broke. Sorry)');
@@ -44,7 +47,6 @@ export class MovieCardComponent implements OnInit {
       localStorage.clear();
       location.href='.';
     });
-    console.log('not waiting');
   }
 
   getFavoriteMovies(): void {
