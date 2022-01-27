@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Update profile data for {{userData.Username || ''}}</mat-card-title>
+  </mat-card-header>
+  <p>Email: {{userData.Email}}</p>
+  <p>Birthday: {{userData.Birthday | date:'longDate' || 'not set'}}</p>
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <input matInput [(ngModel)]="updatedUserData.Username" placeholder="Username" type="text" name="Username" >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="updatedUserData.Password" placeholder="Password" type="password" name="Password" >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="updatedUserData.Email" placeholder="email" type="email" name="Email">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="updatedUserData.Birthday" placeholder="Birthday" type="date" name="Birthday">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="updateUser()" color="primary">Update</button>
+  </mat-card-actions>
+</mat-card>
