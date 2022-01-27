@@ -32,13 +32,13 @@ export class FetchApiDataService {
     let userDetailsToSend = { ...userDetails };
     if (userDetails.Birthday === '' ) delete userDetailsToSend.Birthday;
     return this.http.post(apiUrl + 'users/register', userDetailsToSend).pipe(
-      catchError(this.handleError)
+      catchError(this.handleLoginError)
     );
   }
 
   public userLogin(loginCredentials: any): Observable<any> {
     return this.http.post(apiUrl + 'login', loginCredentials).pipe(
-      catchError(this.handleError)
+      catchError(this.handleLoginError)
     );
   }
 
@@ -206,6 +206,19 @@ export class FetchApiDataService {
     }
     return throwError(
       'Something bad happened; please try again later.'
+    );
+  }
+
+  private handleLoginError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error ocurred:', error.error.message);
+    } else {
+      console.error(
+        `Error status code ${error.status} ` +
+        `Error body is: ${error.error}`);
+    }
+    return throwError(
+      'Invalid credentials.'
     );
   }
 }
