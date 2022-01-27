@@ -130,6 +130,11 @@ export class ProfileComponent implements OnInit {
     location.href='/movies';
   }
 
+  logout(): void {
+    localStorage.clear();
+    location.href='/';
+  }
+
   deleteUserAccount(): void {
     let confirmed:boolean = window.confirm('WARNING: This can not be undone. Are you sure you want to delete your profile?');
     console.log(confirmed);

@@ -99,4 +99,9 @@ export class MovieCardComponent implements OnInit {
     location.href='/profile';
   }
 
+  logout(): void {
+    localStorage.clear();
+    location.href='/';
+  }
+
 }
