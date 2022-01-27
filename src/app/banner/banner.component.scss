@@ -1,0 +1,21 @@
+#banner {
+  width: 100%;
+  background-color: orange;
+  height: 80px;
+  padding-top: 15px;
+  padding-right: 5px;
+}
+
+#banner__title, #banner__buttons {
+  display: inline;
+}
+
+#banner__title {
+  font-size: 3em;
+  margin: 1em;
+  margin-top: 15px;
+}
+
+#banner__buttons {
+  float: right;
+}

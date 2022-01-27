@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
+import { BannerComponent } from '../banner/banner.component';
 
 @Component({
   selector: 'app-profile',
@@ -132,15 +133,6 @@ export class ProfileComponent implements OnInit {
     this.fetchApiData.removeFavoriteMovie(id).subscribe((resp:any) => {
       location.reload();
     })
-  }
-
-  toMovies(): void {
-    location.href='/movies';
-  }
-
-  logout(): void {
-    localStorage.clear();
-    location.href='/';
   }
 
   deleteUserAccount(): void {

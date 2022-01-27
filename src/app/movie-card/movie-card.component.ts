@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
+import { BannerComponent } from '../banner/banner.component';
 import { NgIf } from '@angular/common';
 
 
@@ -16,6 +17,7 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./movie-card.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
+
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   favoriteMovieIDs: any[] = [];
@@ -117,13 +119,5 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  toProfile(): void {
-    location.href='/profile';
-  }
-
-  logout(): void {
-    localStorage.clear();
-    location.href='/';
-  }
 
 }
