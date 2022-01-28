@@ -1,8 +1,8 @@
 <div id="banner">
   <h1 id="banner__title">MyFlix</h1>
   <div id="banner__buttons">
-    <button *ngIf="url === '/profile'" mat-raised-button (click)="toMovies()">All Movies</button>
-    <button mat-raised-button (click)="toProfile()">Profile</button>
+    <button *ngIf="onProfilePage" mat-raised-button (click)="toMovies()">All Movies</button>
+    <button *ngIf="!onProfilePage" mat-raised-button (click)="toProfile()">Profile</button>
     <button mat-raised-button (click)="logout()">Logout</button>
   </div>
 

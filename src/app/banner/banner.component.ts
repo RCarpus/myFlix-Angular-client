@@ -8,14 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent implements OnInit {
-  url: string = '';
+  onProfilePage: boolean = false;
   constructor(
     private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.url = window.location.pathname;
-    console.log(this.url);
+    this.onProfilePage = window.location.pathname.search(/profile/) > -1;
   }
 
   toProfile(): void {
