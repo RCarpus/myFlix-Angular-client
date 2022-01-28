@@ -1,3 +1,10 @@
+/**
+ * A simple loading animation fixed in the center of the screen.  
+ * Used whenever we are waiting on a response from the server.
+ * 
+ * @module LoadingAnimationComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

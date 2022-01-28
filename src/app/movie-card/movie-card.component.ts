@@ -1,3 +1,13 @@
+/**
+ * Renders a responsive grid of movie cards for each movie in the database.  
+ * Each movie card has an image, links to open dialogs for genre, director, and description 
+ * components, and a toggle button to add or remove the movie from the user's favorites.  
+ *   
+ * Also renders a BannerComponent.
+ * 
+ * @module MovieCardComponent
+ */
+
 import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';

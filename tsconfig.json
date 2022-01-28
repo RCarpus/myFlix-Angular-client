@@ -30,7 +30,19 @@
     "strictTemplates": true
   },
   "typedocOptions": {
-    "entryPoints": ["./src/main.ts"],
+    "entryPoints": [
+      "./src/app/banner/banner.component.ts",
+      "./src/app/description/description.component.ts",
+      "./src/app/director/director.component.ts",
+      "./src/app/genre/genre.component.ts",
+      "./src/app/loading-animation/loading-animation.component.ts",
+      "./src/app/movie-card/movie-card.component.ts",
+      "./src/app/profile/profile.component.ts",
+      "./src/app/user-login-form/user-login-form.component.ts",
+      "./src/app/user-registration-form/user-registration-form.component.ts",
+      "./src/app/welcome-page/welcome-page.component.ts",
+      "./src/app/fetch-api-data.service.ts"
+    ],
     "out": "doc"
   }
 }
