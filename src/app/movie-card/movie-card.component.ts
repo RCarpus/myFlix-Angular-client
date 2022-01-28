@@ -46,7 +46,7 @@ export class MovieCardComponent implements OnInit {
       // ImagePath is saved to server as <MovieTitle>.jpg
       // I need to modify the returned data to find the actual image path in this app.
       this.movies.forEach(movie => {
-        movie.ImagePath = `../assets/img/${movie.ImagePath}`;
+        movie.ImagePath = `./assets/img/${movie.ImagePath}`;
       });
       this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
         this.favoriteMovieIDs = resp;

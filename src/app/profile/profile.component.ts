@@ -98,7 +98,7 @@ export class ProfileComponent implements OnInit {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       this.movies.forEach(movie => {
-        movie.ImagePath = `../assets/img/${movie.ImagePath}`;
+        movie.ImagePath = `./assets/img/${movie.ImagePath}`;
       });
       if (this.userData.FavoriteMovies) {
         this.favoriteMovies = this.userData.FavoriteMovies.map((_id: string) => {
