@@ -8,6 +8,7 @@ import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
 import { BannerComponent } from '../banner/banner.component';
+import { LoadingAnimationComponent } from '../loading-animation/loading-animation.component';
 import { NgIf } from '@angular/common';
 
 
@@ -21,6 +22,7 @@ import { NgIf } from '@angular/common';
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   favoriteMovieIDs: any[] = [];
+  loading: boolean = false;
 
   constructor(
     public fetchApiData: FetchApiDataService, 
@@ -32,6 +34,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   getMovies(): void {
+    this.loading = true;
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       /**
        * When the user loads the /movies page, loads in the movies and 
@@ -48,6 +51,7 @@ export class MovieCardComponent implements OnInit {
       this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
         this.favoriteMovieIDs = resp;
         this.mapFavorites();
+        this.loading = false;
       });
       return this.movies;
     }, (error: any) => {

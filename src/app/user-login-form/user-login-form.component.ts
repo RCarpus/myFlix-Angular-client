@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login-form.component.scss']
 })
 export class UserLoginFormComponent implements OnInit {
+  loading: boolean = false;
 
   @Input() userData = { Username: '', Password: '' };
 
@@ -31,19 +32,22 @@ export class UserLoginFormComponent implements OnInit {
   }
 
   loginUser(): void {
+    this.loading = true;
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
       // User was successfully logged in
       this.dialogRef.close();
       console.log(result);
+      this.loading = false;
       localStorage.setItem('user', result.user.Username);
       localStorage.setItem('token', result.token);
-      this.snackBar.open(result, 'OK', {
+      this.snackBar.open('Logged in', 'Welcome, ' + result.user.Username, {
         duration: 2000
       });
       this.router.navigate(['movies']);
     }, (result) => {
       console.log(result);
-      this.snackBar.open(result, 'OK', {
+      this.loading = false;
+      this.snackBar.open('Login failed', 'Check your credentials', {
         duration: 2000
       });
     });

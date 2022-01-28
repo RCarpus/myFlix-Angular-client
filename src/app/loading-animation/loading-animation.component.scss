@@ -1,0 +1,33 @@
+#loading-message-container {
+  width: 320px;
+  height: 3em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -160px;
+  margin-top: -160;
+  z-index: 5;
+
+  background: linear-gradient(-45deg, orange, rgb(229, 255, 0), white);
+	background-size: 400% 400%;
+	animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+#loading-message {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 12px;
+}

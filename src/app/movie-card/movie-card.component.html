@@ -1,4 +1,5 @@
 <app-banner></app-banner>
+<app-loading-animation *ngIf="loading"></app-loading-animation>
 <div id="movie-card-container">
   <mat-card *ngFor="let movie of movies; let i=index;" class="movie-card">
     <mat-card-header>

@@ -12,6 +12,7 @@ import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
 import { BannerComponent } from '../banner/banner.component';
+import { LoadingAnimationComponent } from '../loading-animation/loading-animation.component';
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
   };
   movies: any[] = [];
   favoriteMovies: any[] = [];
+  loading: boolean = false;
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -40,12 +42,14 @@ export class ProfileComponent implements OnInit {
      * Loads in the user data and 
      * THEN fetches movies
      */
+    this.loading = true;
     let user: string = localStorage.getItem('user') || '';
     console.log(`loading data for: ${user}`);
     this.fetchApiData.getOneUser(user).subscribe((resp: any) => {
       this.userData = resp;
       console.log(resp);
       this.getMovies();
+      this.loading = false;
       return resp;
     }, (error: any) => {
       console.error(error);

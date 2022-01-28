@@ -1,5 +1,7 @@
 <app-banner></app-banner>
 
+<app-loading-animation *ngIf="loading"></app-loading-animation>
+
 <mat-card>
   <mat-card-header>
     <mat-card-title>Update profile data for {{userData.Username || ''}}</mat-card-title>

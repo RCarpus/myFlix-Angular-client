@@ -27,6 +27,7 @@ import { GenreComponent } from './genre/genre.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DescriptionComponent } from './description/description.component';
 import { BannerComponent } from './banner/banner.component';
+import { LoadingAnimationComponent } from './loading-animation/loading-animation.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     GenreComponent,
     ProfileComponent,
     DescriptionComponent,
-    BannerComponent
+    BannerComponent,
+    LoadingAnimationComponent
   ],
   imports: [
     BrowserModule,
