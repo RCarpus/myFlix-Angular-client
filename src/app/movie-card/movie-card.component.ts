@@ -10,6 +10,7 @@ import { DescriptionComponent } from '../description/description.component';
 import { BannerComponent } from '../banner/banner.component';
 import { LoadingAnimationComponent } from '../loading-animation/loading-animation.component';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class MovieCardComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService, 
     public dialog: MatDialog,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getMovies();
@@ -58,7 +60,7 @@ export class MovieCardComponent implements OnInit {
       console.log('hey idiot. You are not logged in. (Or the server is broke. Sorry)');
       console.error(error);
       localStorage.clear();
-      location.href='.';
+      this.router.navigate(['/']);
     });
   }
 

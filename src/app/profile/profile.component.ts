@@ -13,6 +13,7 @@ import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
 import { BannerComponent } from '../banner/banner.component';
 import { LoadingAnimationComponent } from '../loading-animation/loading-animation.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -54,7 +56,7 @@ export class ProfileComponent implements OnInit {
     }, (error: any) => {
       console.error(error);
       localStorage.clear();
-      location.href = '.';
+      this.router.navigate(['/']);
     });
   }
 
@@ -146,13 +148,13 @@ export class ProfileComponent implements OnInit {
       this.fetchApiData.deleteUser().subscribe((resp:any) => {
         console.log(resp);
         localStorage.clear();
-        location.href = '/';
+        this.router.navigate(['/']);
       }, (error:any) => {
         console.error(error);
         console.log('This is not really an error');
         this.snackBar.open('bye', 'don\'t let the door hit you on the way out');
         localStorage.clear();
-        location.href = '/';
+        this.router.navigate(['/']);
       });
     }
   }

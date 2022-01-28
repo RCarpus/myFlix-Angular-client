@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome-page',
@@ -10,7 +11,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class WelcomePageComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    ) { }
 
   ngOnInit(): void {
   }
@@ -30,7 +34,7 @@ export class WelcomePageComponent implements OnInit {
      * If it's found, the user is redirected to the movie card page.
      * Otherwise, the login dialog should open.
      */
-    if (localStorage.getItem('token')) location.href = '/movies';
+    if (localStorage.getItem('token')) this.router.navigate(['movies']);
     else {
       this.dialog.open(UserLoginFormComponent, {
         // Assigning the dialog a width

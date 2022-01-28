@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-banner',
@@ -8,7 +9,9 @@ import { NgIf } from '@angular/common';
 })
 export class BannerComponent implements OnInit {
   url: string = '';
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.url = window.location.pathname;
@@ -16,15 +19,15 @@ export class BannerComponent implements OnInit {
   }
 
   toProfile(): void {
-    location.href = '/profile';
+    this.router.navigate(['profile']);
   }
 
   logout(): void {
     localStorage.clear();
-    location.href = '/';
+    this.router.navigate(['/']);
   }
 
   toMovies(): void {
-    location.href = '/movies';
+    this.router.navigate(['movies']);
   }
 }
