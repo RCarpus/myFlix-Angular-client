@@ -1,12 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+/**
+ * Renders a registration form for users to make a new account.  
+ * The user must supply a valid Username, Password, Email, and 
+ * (optional) Birthday.
+ * 
+ * @module UserRegistrationFormComponent
+ */
 
-// I'll use this to close the dialog on success
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-// This brings the API calls I created in to this component
 import { FetchApiDataService } from '../fetch-api-data.service';
 
-// This is used to display notification back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -15,8 +19,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-registration-form.component.scss']
 })
 export class UserRegistrationFormComponent implements OnInit {
+  /**
+   * Boolean that triggers a loading animation used while awaiting 
+   * a response from the server.
+   */
   loading: boolean = false;
 
+  /**
+   * The input userData is empty strings by default.
+   * This is updated when the suer types into the form fields.
+   */
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   constructor(
@@ -28,13 +40,17 @@ export class UserRegistrationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // This function sends the form inputs to the backend
+  /**
+   * Attempts to register the user with teh input credentials.  
+   * Uses [[FetchApiDataService.userRegistration]].  
+   * Upon sucessful registration, the user can then log in.  
+   * If registration fails, the user sees a snackbar dialog 
+   * warning them that the credentials are invalid.
+   */
   registerUser(): void {
     this.loading = true;
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
-      // User was successfully registered
       this.dialogRef.close();
-      console.log(result);
       this.loading = false;
       this.snackBar.open('Registered', 'Now you can log in', {
         duration: 2000
@@ -47,5 +63,4 @@ export class UserRegistrationFormComponent implements OnInit {
       });
     });
   }
-
 }

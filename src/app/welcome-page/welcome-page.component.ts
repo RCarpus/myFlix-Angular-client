@@ -1,3 +1,10 @@
+/**
+ * The landing page for users who are not logged in.  
+ * Renders buttons to allow login or registration.  
+ * 
+ * @module WelcomePageComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
@@ -19,7 +26,9 @@ export class WelcomePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // This is the function that will open the dialog whenthe signup button is clicked
+  /**
+   * Opens a dialog with a [[UserRegistrationFormComponent]]
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       // Assigning the dialog a width
@@ -27,13 +36,18 @@ export class WelcomePageComponent implements OnInit {
     });
   }
 
+  /**
+   * If the user is already logged in, they should have a valid JWT
+   * saved in localStorage already. This function checks first for a JWT.  
+   * If it's found, user is redirected to the movie card page. 
+   *  
+   * Otherwise, the login dialog should open.  
+   * 
+   * If the user has a JWT saved but it is invalid for some reason, 
+   * the movie card page will find out when trying to get the movie data 
+   * and the user will be logged out.
+   */
   openUserLoginDialog(): void {
-    /**
-     * If the user is already logged in, they should have a valid JWT
-     * saved in localStorage already. This function checks for a JWT first.
-     * If it's found, the user is redirected to the movie card page.
-     * Otherwise, the login dialog should open.
-     */
     if (localStorage.getItem('token')) this.router.navigate(['movies']);
     else {
       this.dialog.open(UserLoginFormComponent, {
@@ -41,7 +55,5 @@ export class WelcomePageComponent implements OnInit {
         width: '280px'
       });
     }
-
   }
-
 }

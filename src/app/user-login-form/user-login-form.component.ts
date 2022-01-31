@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+/**
+ * Renders a login form for users to enter their Username and Password.
+ * 
+ * @module UserLoginFormComponent
+ */
 
-// I'll use this to close the dialog on success
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-// This brings the API calls I created in to this component
 import { FetchApiDataService } from '../fetch-api-data.service';
 
-// This is used to display notification back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,8 +18,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login-form.component.scss']
 })
 export class UserLoginFormComponent implements OnInit {
+  /**
+   * Boolean that triggers a loading animation used while awaiting 
+   * a response from the server.
+   */
   loading: boolean = false;
 
+  /**
+   * The input userData is empty strings by default.  
+   * This is updated when the user types into the form fields.
+   */
   @Input() userData = { Username: '', Password: '' };
 
   constructor(
@@ -31,12 +40,17 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Attempts to log the user in with the input credentials.  
+   * Uses [[FetchApiDataService.userLogin]].  
+   * Saves Username and token in localStorage and 
+   * redirects to `/movies` upon successful login.  
+   * Gives a snackbar message if login fails.
+   */
   loginUser(): void {
     this.loading = true;
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-      // User was successfully logged in
       this.dialogRef.close();
-      console.log(result);
       this.loading = false;
       localStorage.setItem('user', result.user.Username);
       localStorage.setItem('token', result.token);
@@ -52,5 +66,4 @@ export class UserLoginFormComponent implements OnInit {
       });
     });
   }
-
 }
