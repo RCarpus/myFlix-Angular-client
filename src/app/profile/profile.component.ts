@@ -108,6 +108,7 @@ export class ProfileComponent implements OnInit {
     if (this.updatedUserData.Birthday !== '') dataToSend.Birthday = this.updatedUserData.Birthday;
     this.fetchApiData.updateUserData(dataToSend).subscribe((resp: any) => {
       this.userData = resp;
+      localStorage.setItem('user', resp.Username);
       this.snackBar.open('updated sucessfully', '', {
         duration: 3000,
         panelClass: ['sucessful-snack']
