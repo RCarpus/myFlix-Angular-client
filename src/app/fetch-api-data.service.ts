@@ -30,7 +30,14 @@ export class FetchApiDataService {
    * API call to register a new user.
    * @param userDetails {Username: <string>, Password: <string> 
    * Email: <string>, BirthDate: <date (optional)>}
-   * @returns data for new user
+   * @returns data for new user in JSON format  
+   * { _id: <string>,  
+   *   Username: <string>,  
+   *   Password: <string> (hashed),  
+   *   Email: <string>, 
+   *   Birthday: <string>  
+   *   FavoriteMovies: []  
+   * }
    */
   public userRegistration(userDetails: any): Observable<any> {
     // I want to prevent the API from receiving an empty string for the Birthday.
@@ -45,7 +52,17 @@ export class FetchApiDataService {
   /**
    * API call to login an existing user
    * @param loginCredentials {Username: <string>, Password: <string>}
-   * @returns {user, token}
+   * @returns  data for logged in user and JWT in JSON format  
+   * { user: {  
+   *   _id: <string>,  
+   *   Username: <string>,
+   *   Password: <string> (hashed),  
+   *   Email: <string>,  
+   *   Birthday: <string>,  
+   *   FavoriteMovies: [<string>]  
+   *   },   
+   *   token: <string>   
+   * }
    */
   public userLogin(loginCredentials: any): Observable<any> {
     return this.http.post(apiUrl + 'login', loginCredentials).pipe(
@@ -59,7 +76,14 @@ export class FetchApiDataService {
    * endpoint and authorization.
    * @param updatedInfo {Username: <string>, Password: <string>,
    * Email: <string>, BirthDate: <string>} (all fields optional)
-   * @returns updated user info
+   * @returns updated user info  
+   * { _id: <string>,   
+   *   Username: <string>,   
+   *   Password: <string> (hashed),   
+   *   Email: <string>,  
+   *   Birthday: <string>  
+   *   FavoriteMovies: [<string>]  
+   * }
    */
   public updateUserData(updatedInfo: any): Observable<any> {
     const user = localStorage.getItem('user');
@@ -78,7 +102,16 @@ export class FetchApiDataService {
   /**
    * API call to get data for all movies.
    * Pulls token from localStorage for auth.
-   * @returns object containing data for all movies
+   * @returns object containing array of data for all movies  
+   * {[  
+   *   Genre: { Name: <string>, Description: <string> },    
+   *   Director: { Name: <string>, Bio: <string>, BirthYear: <string> },    
+   *   _id: <string>,   
+   *   Title: <string>,   
+   *   Description: <string>,   
+   *   Featured: <boolean>,   
+   *   ImagePath: <string> (example: "spiritedAway.png"),  
+   * ]}
    */
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
@@ -98,6 +131,15 @@ export class FetchApiDataService {
    * Pulls token from localStorage for auth.
    * @param movieTitle <string>
    * @returns object containing data for one movie.
+   * {
+   *   Genre: { Name: <string>, Description: <string> },  
+   *   Director: { Name: <string>, Bio: <string>, BirthYear: <number> },  
+   *   _id: <string>,  
+   *   Title: <string>,  
+   *   Description: <string>,  
+   *   Featured: <boolean>,  
+   *   ImagePath: <string> (example: "spiritedAway.png"),  
+   * }
    */
   public getOneMovie(movieTitle: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -116,7 +158,8 @@ export class FetchApiDataService {
    * API call to get data for a genre.  
    * Pulls token from localStorage for auth.
    * @param genre <string>
-   * @returns object containing data for one genre
+   * @returns object containing data for one genre  
+   * { Name: <string>, Description: <string> }
    */
   public getGenre(genre: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -135,7 +178,8 @@ export class FetchApiDataService {
    * API call to get data for a director.  
    * Pulls token from localStorage for auth.
    * @param name <string>
-   * @returns object containing data for one director
+   * @returns object containing data for one director  
+   * { Name: <string>, Bio: <string>, BirthYear: <number>}
    */
   public getDirector(name: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -154,7 +198,14 @@ export class FetchApiDataService {
    * API call to add a movie to a user's favorites.  
    * Pulls username and token from localStorage.  
    * @param movieID <string>
-   * @returns updated user data
+   * @returns updated user data  
+   * { _id: <string>,   
+   *   Username: <string>,   
+   *   Password: <string> (hashed),   
+   *   Email: <string>,  
+   *   Birthday: <string>  
+   *   FavoriteMovies: [<string>]  
+   * }   
    */
   public addFavoriteMovie(movieID: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -193,7 +244,14 @@ export class FetchApiDataService {
    * API call to remove a movie from the user's list of favorites.
    * Pulls username and token from localStorage.
    * @param movieID <string>
-   * @returns updated user data
+   * @returns updated user data  
+   * { _id: <string>,   
+   *   Username: <string>,   
+   *   Password: <string> (hashed),   
+   *   Email: <string>,  
+   *   Birthday: <string>  
+   *   FavoriteMovies: [<string>]  
+   * }
    */
   public removeFavoriteMovie(movieID: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -231,7 +289,14 @@ export class FetchApiDataService {
   /**
    * API call to get data for all users.
    * Pulls token from localStorage.
-   * @returns object containing data for all users.
+   * @returns object containing data for all users.  
+   * {[  _id: <string>,   
+   *     Username: <string>,   
+   *     Password: <string> (hashed),   
+   *     Email: <string>,  
+   *     Birthday: <string>  
+   *     FavoriteMovies: [<string>]  
+   * ]}  
    */
   public getAllUsers(): Observable<any> {
     const token = localStorage.getItem('token');
@@ -250,7 +315,14 @@ export class FetchApiDataService {
    * API call to get data for one user.
    * Pulls token from localStorage.
    * @param user <string>
-   * @returns object containing user's data.
+   * @returns object containing user's data.  
+   * { _id: <string>,   
+   *   Username: <string>,   
+   *   Password: <string> (hashed),   
+   *   Email: <string>,  
+   *   Birthday: <string>  
+   *   FavoriteMovies: [<string>]  
+   * }
    */
   public getOneUser(user: string): Observable<any> {
     const token = localStorage.getItem('token');
